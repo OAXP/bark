@@ -38,6 +38,7 @@ models = {}
 global models_devices
 models_devices = {}
 
+last_used_device = -1
 
 CONTEXT_WINDOW_SIZE = 1024
 
@@ -139,7 +140,9 @@ else:
 
 def _grab_best_device(use_gpu=True):
     if torch.cuda.device_count() > 0 and use_gpu:
-        device = "cuda"
+        last_used_device = (last_used_device + 1) % torch.cuda.device_count()
+        device = "cuda:" + last_used_device
+        print("Using device : " + device)
     elif torch.backends.mps.is_available() and use_gpu and GLOBAL_ENABLE_MPS:
         device = "mps"
     else:
@@ -204,18 +207,12 @@ def _load_model(ckpt_path, device, use_small=False, model_type="text"):
     if model_type == "text":
         ConfigClass = GPTConfig
         ModelClass = GPT
-        if device == "cuda":
-            device = "cuda:0"
     elif model_type == "coarse":
         ConfigClass = GPTConfig
         ModelClass = GPT
-        if device == "cuda":
-            device = "cuda:1"
     elif model_type == "fine":
         ConfigClass = FineGPTConfig
         ModelClass = FineGPT
-        if device == "cuda":
-            device = "cuda:2"
     else:
         raise NotImplementedError()
     model_key = f"{model_type}_small" if use_small or USE_SMALL_MODELS else model_type
