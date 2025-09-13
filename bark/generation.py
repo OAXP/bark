@@ -204,12 +204,18 @@ def _load_model(ckpt_path, device, use_small=False, model_type="text"):
     if model_type == "text":
         ConfigClass = GPTConfig
         ModelClass = GPT
+        if device == "cuda":
+            device = "cuda:0"
     elif model_type == "coarse":
         ConfigClass = GPTConfig
         ModelClass = GPT
+        if device == "cuda":
+            device = "cuda:1"
     elif model_type == "fine":
         ConfigClass = FineGPTConfig
         ModelClass = FineGPT
+        if device == "cuda":
+            device = "cuda:2"
     else:
         raise NotImplementedError()
     model_key = f"{model_type}_small" if use_small or USE_SMALL_MODELS else model_type
