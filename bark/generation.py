@@ -54,18 +54,18 @@ SAMPLE_RATE = 24_000
 
 SUPPORTED_LANGS = [
     ("English", "en"),
-    ("German", "de"),
-    ("Spanish", "es"),
+    #("German", "de"),
+    #("Spanish", "es"),
     ("French", "fr"),
-    ("Hindi", "hi"),
-    ("Italian", "it"),
+    #("Hindi", "hi"),
+    #("Italian", "it"),
     ("Japanese", "ja"),
-    ("Korean", "ko"),
-    ("Polish", "pl"),
-    ("Portuguese", "pt"),
-    ("Russian", "ru"),
-    ("Turkish", "tr"),
-    ("Chinese", "zh"),
+    #("Korean", "ko"),
+    #("Polish", "pl"),
+    #("Portuguese", "pt"),
+    #("Russian", "ru"),
+    #("Turkish", "tr"),
+    #("Chinese", "zh"),
 ]
 
 ALLOWED_PROMPTS = {"announcer"}
