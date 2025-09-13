@@ -38,6 +38,7 @@ models = {}
 global models_devices
 models_devices = {}
 
+global last_used_device
 last_used_device = -1
 
 CONTEXT_WINDOW_SIZE = 1024
@@ -139,6 +140,7 @@ else:
 
 
 def _grab_best_device(use_gpu=True):
+    global last_used_device
     if torch.cuda.device_count() > 0 and use_gpu:
         last_used_device = (last_used_device + 1) % torch.cuda.device_count()
         device = "cuda:" + last_used_device
