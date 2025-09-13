@@ -143,7 +143,7 @@ def _grab_best_device(use_gpu=True):
     global last_used_device
     if torch.cuda.device_count() > 0 and use_gpu:
         last_used_device = (last_used_device + 1) % torch.cuda.device_count()
-        device = "cuda:" + last_used_device
+        device = "cuda:" + str(last_used_device)
         print("Using device : " + device)
     elif torch.backends.mps.is_available() and use_gpu and GLOBAL_ENABLE_MPS:
         device = "mps"
